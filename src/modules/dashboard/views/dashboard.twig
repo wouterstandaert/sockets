@@ -2,7 +2,7 @@
 
 {% block Content %}
     <h2>Dashboard</h2>
-    <table class="table">
+    <table class="table" id="active-users">
         <thead>
             <tr>
                 <th>Username</th>
@@ -16,4 +16,17 @@
             </tr>
         </tbody>
     </table>
+
+    <hr />
+
+    <h2>Verstuur uw bericht</h2>
+    <form>
+        <div class="form-group">
+            <label for="Message">Your message</label>
+            <textarea name="Message" id="Message" class="form-control"></textarea>
+        </div>
+        <div class="button-row">
+            <button name="Send" class="btn btn-primary">Send</button>
+        </div>
+    </form>
 {% endblock %}
