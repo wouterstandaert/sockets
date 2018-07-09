@@ -1,2 +1,19 @@
-<h2>Dashboard</h2>
-<h3>Welcome Username</h3>
+{% extends 'layout.twig' %}
+
+{% block Content %}
+    <h2>Dashboard</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>Online</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

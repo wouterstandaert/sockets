@@ -6,6 +6,7 @@
     },
     "require": {
         "cboden/ratchet": "^0.4.1",
-        "twig/twig": "^2.4"
+        "twig/twig": "^2.4",
+        "twbs/bootstrap": "^4.1"
     }
 }
