@@ -7,6 +7,8 @@ conn.onopen = function(e) {
 };
 
 // Handle incoming messages
-conn.onmessage = function(e) {
-    console.log(e.data);
+conn.onmessage = function(event) {
+    console.log(event.data);
+
+    $('#active-users').find('tbody').append('<tr><td>' + event.data + '</td><td>Online</td></tr>');
 };
