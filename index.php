@@ -2,18 +2,15 @@
 
 require_once './vendor/autoload.php';
 
-echo '<html>';
-echo '<body>';
-echo '<script type="text/javascript">';
+$loader = new Twig_Loader_Filesystem(
+    array(
+        __DIR__ . '/src/assets/html',
+        __DIR__ . '/src/modules/dashboard/views',
+    )
+);
 
-echo "var conn = new WebSocket('ws://localhost:8080');
-conn.onopen = function(e) {
-    console.log(\"Connection established!\");
-};
+$twig = new Twig_Environment($loader, [
+    'cache' => __DIR__ . '/cache/views'
+]);
 
-conn.onmessage = function(e) {
-    console.log(e.data);
-};";
-echo '</script>';
-echo '</body>';
-echo '</html>';
+echo $twig->render('dashboard.twig');
