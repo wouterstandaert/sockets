@@ -8,17 +8,24 @@ use Ratchet\ConnectionInterface;
 class Intranet implements MessageComponentInterface
 {
 	/**
-	 * The active intranet users
+	 * The active connections
 	 *
-	 * @var
+	 * @var array|null
 	 */
 	protected $clients;
 
 
+	/**
+	 * The connected users
+	 *
+	 * @var array|null
+	 */
 	protected $users;
 
 
 	/**
+	 * Handle a new connection
+	 *
 	 * @param ConnectionInterface $connection The current connection
 	 */
 	public function onOpen(ConnectionInterface $connection)
@@ -32,6 +39,12 @@ class Intranet implements MessageComponentInterface
 	}
 
 
+	/**
+	 * Process data
+	 *
+	 * @param ConnectionInterface $connection The current connection
+	 * @param string $payload The received content
+	 */
 	public function onMessage(ConnectionInterface $connection, $payload)
 	{
 		$payload = json_decode($payload, true);
@@ -42,6 +55,11 @@ class Intranet implements MessageComponentInterface
 	}
 
 
+	/**
+	 * Close an active connection
+	 *
+	 * @param ConnectionInterface $connection The current connection
+	 */
 	public function onClose(ConnectionInterface $connection)
 	{
 		// Add a new user connection
@@ -51,6 +69,12 @@ class Intranet implements MessageComponentInterface
 	}
 
 
+	/**
+	 * Error handling
+	 *
+	 * @param ConnectionInterface $connection
+	 * @param \Exception $e The occurred exception
+	 */
 	public function onError(ConnectionInterface $connection, \Exception $e)
 	{
 		echo "An error has occurred: {$e->getMessage()}\n";
