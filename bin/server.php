@@ -3,7 +3,7 @@
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
-use MyApp\Intranet;
+use App\Intranet;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
