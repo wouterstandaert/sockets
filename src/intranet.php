@@ -12,7 +12,7 @@ class Intranet implements MessageComponentInterface
 	 *
 	 * @var
 	 */
-	protected $users;
+	protected $clients;
 
 
 	/**
@@ -21,7 +21,7 @@ class Intranet implements MessageComponentInterface
 	public function onOpen(ConnectionInterface $connection)
 	{
 		// Add a new user connection
-		$this->users[$connection->resourceId] = $connection;
+		$this->clients[$connection->resourceId] = $connection;
 
 		echo get_class($connection);
 
@@ -31,10 +31,10 @@ class Intranet implements MessageComponentInterface
 
 	public function onMessage(ConnectionInterface $from, $message)
 	{
-		$numRecv = count($this->users) - 1;
+		$numRecv = count($this->clients) - 1;
 		echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n", $from->resourceId, $message, $numRecv, $numRecv == 1 ? '' : 's');
 
-		foreach ($this->users as $user) {
+		foreach ($this->clients as $user) {
 			if ($from !== $user) {
 				// The sender is not the receiver, send to each client connected
 				$user->send($message);
@@ -46,7 +46,7 @@ class Intranet implements MessageComponentInterface
 	public function onClose(ConnectionInterface $connection)
 	{
 		// Add a new user connection
-		unset($this->users[$connection->resourceId]);
+		unset($this->clients[$connection->resourceId]);
 
 		echo "New user has disconnected: {$connection->resourceId}";
 	}
