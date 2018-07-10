@@ -15,6 +15,9 @@ class Intranet implements MessageComponentInterface
 	protected $clients;
 
 
+	protected $users;
+
+
 	/**
 	 * @param ConnectionInterface $connection The current connection
 	 */
@@ -29,17 +32,13 @@ class Intranet implements MessageComponentInterface
 	}
 
 
-	public function onMessage(ConnectionInterface $from, $message)
+	public function onMessage(ConnectionInterface $connection, $payload)
 	{
-		$numRecv = count($this->clients) - 1;
-		echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n", $from->resourceId, $message, $numRecv, $numRecv == 1 ? '' : 's');
+		$payload = json_decode($payload, true);
 
-		foreach ($this->clients as $user) {
-			if ($from !== $user) {
-				// The sender is not the receiver, send to each client connected
-				$user->send($message);
-			}
-		}
+		$this->users[$connection->resourceId] = $payload['data']['user'];
+
+		var_dump($this->users);
 	}
 
 
