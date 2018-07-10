@@ -15,16 +15,15 @@ class Intranet implements MessageComponentInterface
 	protected $users;
 
 
-	public function __construct()
-	{
-		$this->users = new \SplObjectStorage;
-	}
-
-
+	/**
+	 * @param ConnectionInterface $connection The current connection
+	 */
 	public function onOpen(ConnectionInterface $connection)
 	{
 		// Add a new user connection
-		$this->users->attach($connection);
+		$this->users[$connection->resourceId] = $connection;
+
+		echo get_class($connection);
 
 		echo "New user has connected: {$connection->resourceId}";
 	}
@@ -47,7 +46,7 @@ class Intranet implements MessageComponentInterface
 	public function onClose(ConnectionInterface $connection)
 	{
 		// Add a new user connection
-		$this->users->detach($connection);
+		unset($this->users[$connection->resourceId]);
 
 		echo "New user has disconnected: {$connection->resourceId}";
 	}
