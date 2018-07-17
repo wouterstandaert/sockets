@@ -1,19 +1,23 @@
 <?php
 
-use Ratchet\Server\IoServer;
-use Ratchet\Http\HttpServer;
-use Ratchet\WebSocket\WsServer;
-use App\Intranet;
+require dirname(__DIR__) . '/vendor/autoload.php';
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
+use App\Pusher;
+use React\ZMQ\Context;
+use Thruway\Peer\Router;
+use Thruway\Transport\RatchetTransportProvider;
 
-$server = IoServer::factory(
-	new HttpServer(
-		new WsServer(
-			new Intranet()
-		)
-	),
-	8080
-);
+// Initialize routing
+$router = new Router();
 
-$server->run();
+$loop = $router->getLoop();
+
+$context = new Context($loop);
+$pull = $context->getSocket(\ZMQ::SOCKET_PULL);
+$pull->bind('tcp://127.0.0.1:5555');
+
+$router->addTransportProvider(new RatchetTransportProvider('0.0.0.0', 7474));
+$router->addInternalClient(new Pusher('default', $loop, $pull));
+
+// Start routing
+$router->start();
