@@ -1,15 +1,17 @@
-// Establish connection
-var socket = new WebSocket('ws://localhost:8080');
+// Establish a connection to our push server
+var connection = new autobahn.Connection({
+    url: 'ws://127.0.0.1:7474',
+    realm: 'default'
+});
 
-socket.onopen = function(e) {
-    socket.send(JSON.stringify({
-        event : 'joined',
-        data : {
-            user : {
-                id : 1,
-                name : 'John'
-            }
-        }
-    }));
+connection.onopen = function(session) {
 
+    console.log('Connected');
+
+    session.subscribe('chat', function(payload) {
+        console.log("Payload:", payload[0]);
+    });
 };
+
+// Establish a connection
+connection.open();
