@@ -5,9 +5,9 @@
         }
     },
     "require": {
-        "cboden/ratchet": "^0.4.1",
         "twig/twig": "^2.4",
         "twbs/bootstrap": "^4.1",
-        "react/zmq": "^0.4.0"
+        "react/zmq": "^0.4.0",
+        "voryx/thruway": "^0.5.3"
     }
 }
