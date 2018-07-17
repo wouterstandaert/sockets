@@ -13,5 +13,11 @@ connection.onopen = function(session) {
     });
 };
 
+connection.onclose = function() {
+
+    console.log("Disconnected");
+
+};
+
 // Establish a connection
 connection.open();
