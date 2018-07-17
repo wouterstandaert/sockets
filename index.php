@@ -1,26 +1,16 @@
 <?php
 
+// Load functionality
 require_once './vendor/autoload.php';
 
-// Load template directories
-$loader = new Twig_Loader_Filesystem(
-    array(
-        __DIR__ . '/src/assets/templates',
-        __DIR__ . '/src/modules/dashboard/views',
-    )
-);
+// Create Router instance
+$router = new \Bramus\Router\Router();
 
-// Instantiate a new twig environment with some default settings
-$twig = new Twig_Environment($loader, [
-    //'cache' => __DIR__ . '/cache/views',
-    'debug' => true
-]);
+// Display the dashboard
+$router->get('dashboard', '\App\Controllers\DashboardController@showDashboard');
 
-// Enable debug mode
-$twig->addExtension(new Twig_Extension_Debug());
+// Set a fallback
+$router->set404('\App\Controllers\DashboardController@showDashboard');
 
-// Render the main template
-$layout = $twig->render('layout.twig');
-
-// Render the page template
-echo $twig->render('dashboard.twig', array('Content' > $layout));
+// Start your engine
+$router->run();
