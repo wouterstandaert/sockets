@@ -1,4 +1,5 @@
 .idea
+.env
 cache
 node_modules
 vendor
