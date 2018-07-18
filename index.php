@@ -14,3 +14,4 @@ $router->set404('\App\Controllers\DashboardController@showDashboard');
 
 // Start your engine
 $router->run();
+die("done");

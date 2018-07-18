@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use Dotenv\Dotenv;
 
 class BaseController
 {
@@ -24,38 +25,18 @@ class BaseController
      */
     private function loadSettings()
     {
-        var_dump("Load settings");
-        // @todo: fix getenv
-    }
+        // Set error reporting level
+        // @todo: make this dynamic
+        error_reporting(E_ALL);
 
-
-    /**
-     * Load the template engine
-     */
-    public function loadTemplateEngine()
-    {
-        // Load template directories
-        $loader = new Twig_Loader_Filesystem(
-            array(
-                __DIR__ . '/src/assets/templates',
-                __DIR__ . '/src/modules/' . $this->getModule() . '/views',
-            )
-        );
-
-        // Instantiate a new twig environment with some default settings
-        $twig = new Twig_Environment($loader, [
-            //'cache' => __DIR__ . '/cache/views',
-            'debug' => true
-        ]);
-
-        // Enable debug mode
-        $twig->addExtension(new Twig_Extension_Debug());
-
-        // Render the main template
-        $layout = $twig->render('layout.twig');
-
-        // Render the page template
-        echo $twig->render('dashboard.twig', array('Content' > $layout));
+        // Set the location of the config file
+        $dotenv = new Dotenv('./');
+        // Set required fields
+        //$dotenv->required('DB_HOST');
+        //$dotenv->required('DB_PORT')->isInteger();
+        //$dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD']);
+        // Load settings
+        $dotenv->load();
     }
 
 

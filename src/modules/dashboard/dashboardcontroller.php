@@ -14,10 +14,12 @@ class DashboardController extends BaseController
     {
         $user = [
             'firstname' => 'John',
-            'lastname' => 'Doe'
+            'lastname' => 'Doe',
+            'message' => 'Hello world!'
         ];
 
-        var_dump(json_encode($user));
-        die();
+        header('Content-Type: application/json');
+        echo json_encode($user);
+        exit();
     }
 }
