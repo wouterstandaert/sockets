@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\PushHandler;
+
 class UserController extends BaseController
 {
     public function __construct()
@@ -12,7 +14,14 @@ class UserController extends BaseController
 
     public function signIn()
     {
-        // @todo: Finish up sign in functionality
+        $user = [
+            'firstname' => 'Michel',
+            'lastname' => 'Drets'
+        ];
+
+        // @todo: perform login
+
+        PushHandler::send($user);
     }
 
 
