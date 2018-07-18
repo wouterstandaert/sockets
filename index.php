@@ -19,7 +19,7 @@ $router->get('dashboard', 'DashboardController@showDashboard');
 $router->mount('/test', function() use ($router) {
 
     // Get a list of users
-    $router->get('/', 'TestController@getUsers');
+    $router->get('', 'TestController@showTest');
 
     // Get a single user
     $router->post('/message', 'TestController@postMessage');
@@ -29,7 +29,9 @@ $router->mount('/test', function() use ($router) {
 $router->mount('/users', function() use ($router) {
 
     // Get a list of users
-    $router->get('/', 'UserController@getUsers');
+    $router->get('', 'UserController@getUsers');
+    $router->post('/signin', 'UserController@signIn');
+    $router->post('/signout', 'UserController@signOut');
 
     // Get a single user
     $router->get('/(\d+)', 'UserController@getUser');

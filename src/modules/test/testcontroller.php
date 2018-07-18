@@ -11,6 +11,12 @@ class TestController extends BaseController
         parent::__construct();
     }
 
+
+    public function showTest()
+    {
+        PushHandler::send(array("test", "1", "2"));
+    }
+
     public function postMessage()
     {
         $message = "Hello world";
