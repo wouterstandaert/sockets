@@ -26,6 +26,10 @@ class Pusher extends Client
 
     public function transmit($payload)
     {
+        // Decode the payload
+        $payload = json_decode($payload);
+
+        // @todo: make the topic name dynamic
         $this->getSession()->publish('chat', [ $payload ]);
     }
 }
