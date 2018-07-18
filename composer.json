@@ -9,6 +9,7 @@
         "twbs/bootstrap": "^4.1",
         "react/zmq": "^0.4.0",
         "voryx/thruway": "^0.5.3",
-        "bramus/router": "^1.3"
+        "bramus/router": "^1.3",
+        "vlucas/phpdotenv": "^2.5"
     }
 }
