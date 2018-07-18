@@ -22,7 +22,7 @@ $router->mount('/test', function() use ($router) {
     $router->get('/', 'TestController@getUsers');
 
     // Get a single user
-    $router->post('/(\w+)', 'TestController@postMessage');
+    $router->post('/message', 'TestController@postMessage');
 
 });
 
