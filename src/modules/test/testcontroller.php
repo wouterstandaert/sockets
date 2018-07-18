@@ -15,6 +15,8 @@ class TestController extends BaseController
     {
         $message = "Hello world";
 
+        var_dump("posting message");
+
         PushHandler::send($message);
     }
 }
