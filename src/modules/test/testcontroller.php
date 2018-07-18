@@ -19,9 +19,11 @@ class TestController extends BaseController
 
     public function postMessage()
     {
-        $message = "Hello world";
-
-        var_dump("posting message");
+        $message = [
+            'firstname' => $_POST['firstname'],
+            'lastname' => $_POST['lastname'],
+            'message' => $_POST['message']
+        ];
 
         PushHandler::send($message);
     }

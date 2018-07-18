@@ -15,8 +15,9 @@ class UserController extends BaseController
     public function signIn()
     {
         $user = [
-            'firstname' => 'Michel',
-            'lastname' => 'Drets'
+            'firstname' => $_POST['firstname'],
+            'lastname' => $_POST['lastname'],
+            'event' => 'signin'
         ];
 
         // @todo: perform login
@@ -27,6 +28,15 @@ class UserController extends BaseController
 
     public function signOut()
     {
+        $user = [
+            'firstname' => $_POST['firstname'],
+            'lastname' => $_POST['lastname'],
+            'event' => 'signout'
+        ];
+
+        // @todo: perform login
+
+        PushHandler::send($user);
         // @todo: Finish up sign out functionality
     }
 
