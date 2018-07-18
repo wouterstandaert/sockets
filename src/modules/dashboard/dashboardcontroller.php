@@ -12,6 +12,12 @@ class DashboardController extends BaseController
 
     public function showDashboard()
     {
-        var_dump("Show dashboard");
+        $user = [
+            'firstname' => 'John',
+            'lastname' => 'Doe'
+        ];
+
+        var_dump(json_encode($user));
+        die();
     }
 }
