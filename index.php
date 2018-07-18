@@ -16,6 +16,16 @@ $router->before('GET', '/.*', function () {
 // Display the dashboard
 $router->get('dashboard', 'DashboardController@showDashboard');
 
+$router->mount('/test', function() use ($router) {
+
+    // Get a list of users
+    $router->get('/', 'TestController@getUsers');
+
+    // Get a single user
+    $router->post('/(\w+)', 'TestController@postMessage');
+
+});
+
 $router->mount('/users', function() use ($router) {
 
     // Get a list of users
