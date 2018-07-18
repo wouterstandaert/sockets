@@ -35,6 +35,9 @@ class PushHandler
      */
     public static function send($payload)
     {
+        // JSON encode the data because only string data can be sent
+        $payload = json_encode($payload);
+        // Send the data to the socket
         self::getSocket()->send($payload);
     }
 
